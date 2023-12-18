@@ -5,6 +5,7 @@ services:
       context: .
     restart: always
     container_name: chatgpt_retrieval_plugin
+    env_file: .env
     networks:
       - "proxy"
     labels:
