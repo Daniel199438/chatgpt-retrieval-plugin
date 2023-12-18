@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  chatgpt_retrieval_plugin:
+    build:
+      context: .
+    restart: always
+    container_name: chatgpt_retrieval_plugin
+    networks:
+      - "proxy"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.routers.chatgpt_retrieval_plugin.entrypoints=websecure"
+      - "traefik.http.routers.chatgpt_retrieval_plugin.rule=Host(`retrieval.oneworx.de`)"
+      - "traefik.http.services.chatgpt_retrieval_plugin.loadbalancer.server.port=8084"
+
+networks:
+  proxy:
+    external: true
